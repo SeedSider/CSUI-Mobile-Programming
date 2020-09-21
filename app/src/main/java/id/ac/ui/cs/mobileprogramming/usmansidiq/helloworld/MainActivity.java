@@ -1,4 +1,4 @@
-package id.ac.ui.cs.helloworld;
+package id.ac.ui.cs.mobileprogramming.usmansidiq.helloworld;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import id.ac.ui.cs.mobileprogramming.usmansidiq.helloworld.R;
 
 public class MainActivity extends AppCompatActivity {
 

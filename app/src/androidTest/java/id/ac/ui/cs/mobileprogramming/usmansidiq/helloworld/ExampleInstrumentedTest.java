@@ -1,4 +1,4 @@
-package id.ac.ui.cs.helloworld;
+package id.ac.ui.cs.mobileprogramming.usmansidiq.helloworld;
 
 import android.content.Context;
 
