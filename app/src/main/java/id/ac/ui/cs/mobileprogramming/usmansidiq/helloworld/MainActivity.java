@@ -1,10 +1,7 @@
 package id.ac.ui.cs.mobileprogramming.usmansidiq.helloworld;
-
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -13,8 +10,6 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-
-import id.ac.ui.cs.mobileprogramming.usmansidiq.helloworld.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TextView hello = findViewById(R.id.textview_first);
+                TextView hello = findViewById(R.id.hello_world);
                 hello.setText(R.string.hello_changed);
             }
         });
