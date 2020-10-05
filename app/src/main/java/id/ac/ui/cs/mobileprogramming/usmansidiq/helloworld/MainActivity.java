@@ -11,14 +11,7 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
-    // Use seconds, running and wasRunning respectively
-    // to record the number of seconds passed,
-    // whether the stopwatch is running and
-    // whether the stopwatch was running
-    // before the activity was paused.
 
-    // Number of seconds displayed
-    // on the stopwatch.
     private int seconds = 0;
 
     // Is the stopwatch running?
@@ -63,27 +56,6 @@ public class MainActivity extends Activity {
                 .putBoolean("wasRunning", wasRunning);
     }
 
-    // If the activity is paused,
-    // stop the stopwatch.
-    @Override
-    protected void onPause()
-    {
-        super.onPause();
-        wasRunning = running;
-        running = false;
-    }
-
-    // If the activity is resumed,
-    // start the stopwatch
-    // again if it was running previously.
-    @Override
-    protected void onResume()
-    {
-        super.onResume();
-        if (wasRunning) {
-            running = true;
-        }
-    }
 
     // Start the stopwatch running
     // when the Start button is clicked.
