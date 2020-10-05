@@ -7,6 +7,11 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
-    <string name="hello_first_fragment">Hello World</string>
+    <string name="hello_world">Hello World</string>
     <string name="hello_changed">Hello Boi!</string>
+    <string name="enter_name">Enter your name</string>
+
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="reset">Reset</string>
 </resources>
