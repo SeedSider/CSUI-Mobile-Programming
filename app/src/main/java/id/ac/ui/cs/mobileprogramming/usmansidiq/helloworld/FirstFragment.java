@@ -1,50 +1,47 @@
 package id.ac.ui.cs.mobileprogramming.usmansidiq.helloworld;
 
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-
-import android.content.Context;
-import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
-
+import androidx.lifecycle.ViewModelProvider;
+import android.os.Bundle;
+import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import java.util.List;
-
-import id.ac.ui.cs.mobileprogramming.usmansidiq.helloworld.models.Person;
 import id.ac.ui.cs.mobileprogramming.usmansidiq.helloworld.viewmodels.FirstViewModel;
 
 public class FirstFragment extends Fragment {
 
-    private FirstViewModel mViewModel;
-
-    public static FirstFragment newInstance() {
-        return new FirstFragment();
-    }
-
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.first_fragment, container, false);
-    }
+    private FirstViewModel viewModel;
+    private ListView lv;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(FirstViewModel.class);
-        mViewModel.init();
-        mViewModel.getPersons().observe(getViewLifecycleOwner(), new Observer<List<Person>>() {
-            @Override
-            public void onChanged(List<Person> people) {
+        viewModel = new ViewModelProvider(this).get(FirstViewModel.class);
 
-            }
+        lv.setAdapter(new ArrayAdapter<String>(this.getActivity(),
+                android.R.layout.simple_list_item_1, viewModel.getPersonList()));
+
+        lv.setOnItemClickListener((adapter, itemView, pos, id) -> {
+            TextView tv = (TextView)itemView;
+            Toast.makeText(this.getContext(), tv.getText().toString(), Toast.LENGTH_SHORT).show();
+            viewModel.selectPerson(tv.getText().toString());
         });
     }
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.first_fragment,
+                container, false);
+        lv = (ListView)view.findViewById(R.id.person_lv);
+
+        return view;
+    }
 }

@@ -1,34 +1,49 @@
 package id.ac.ui.cs.mobileprogramming.usmansidiq.helloworld;
 
-import androidx.lifecycle.ViewModelProviders;
-
+import androidx.lifecycle.ViewModelProvider;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import id.ac.ui.cs.mobileprogramming.usmansidiq.helloworld.models.Person;
+import id.ac.ui.cs.mobileprogramming.usmansidiq.helloworld.viewmodels.FirstViewModel;
 
 public class SecondFragment extends Fragment {
+    private FirstViewModel viewModel;
 
+    private TextView name;
+    private TextView birthplace;
+    private TextView quote;
 
-    public static SecondFragment newInstance() {
-        return new SecondFragment();
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        viewModel = new ViewModelProvider(this.getActivity()).get(FirstViewModel.class);
+
+        viewModel.getSelectedPerson().observe(this, item -> {
+            displayDetails(viewModel.getPersonDetails(item));
+        });
+    }
+
+    public void displayDetails(Person person){
+        name.setText(person.getName());
+        birthplace.setText(person.getBirthplace());
+        quote.setText(person.getQuote());
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.second_fragment, container, false);
-    }
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.second_fragment,
+                container, false);
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        // TODO: Use the ViewModel
-    }
+        name = view.findViewById(R.id.name);
+        birthplace = view.findViewById(R.id.birthplace);
+        quote = view.findViewById(R.id.quote);
 
+        return view;
+    }
 }

@@ -1,27 +1,31 @@
 package id.ac.ui.cs.mobileprogramming.usmansidiq.helloworld.viewmodels;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import java.util.List;
 
 import id.ac.ui.cs.mobileprogramming.usmansidiq.helloworld.models.Person;
 import id.ac.ui.cs.mobileprogramming.usmansidiq.helloworld.repositories.PersonRepository;
 
 public class FirstViewModel extends ViewModel {
 
-    private MutableLiveData<List<Person>> mPersons;
-    private PersonRepository mRepo;
+    private final MutableLiveData<String> selectedPerson = new MutableLiveData<String>();
 
-    public void init() {
-        if(mPersons != null) {
-            return;
-        }
-        mRepo = PersonRepository.getInstance();
-        mPersons = mRepo.getPersons();
+    private PersonRepository mRepo = new PersonRepository();
+
+    public void selectPerson(String personName) {
+        selectedPerson.setValue(personName);
     }
-    public LiveData<List<Person>> getPersons() {
-        return mPersons;
+
+    public MutableLiveData<String> getSelectedPerson() {
+        return selectedPerson;
+    }
+
+    public String[] getPersonList(){
+        return mRepo.getPersons();
+    }
+
+    public Person getPersonDetails(String name){
+        return mRepo.getPersonDetails(name);
     }
 }
