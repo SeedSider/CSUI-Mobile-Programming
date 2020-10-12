@@ -34,19 +34,19 @@ public class PersonRepository {
         Person person = new Person();
         person.setName("Usman");
         person.setBirthplace("Soppeng");
-        person.setBirthplace("Diam adalah emas");
+        person.setQuote("Diam adalah emas");
         personDetails.put("Usman", person);
 
         Person person2 = new Person();
         person2.setName("Sidiq");
         person2.setBirthplace("Makassar");
-        person2.setBirthplace("Prokras adalah jalan ninjaku");
+        person2.setQuote("Prokras adalah jalan ninjaku");
         personDetails.put("Sidiq", person2);
 
         Person person3 = new Person();
         person3.setName("Asep");
         person3.setBirthplace("Depok");
-        person3.setBirthplace("Paket phoenix mas?");
+        person3.setQuote("Paket phoenix mas?");
         personDetails.put("Asep", person3);
     }
 }

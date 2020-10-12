@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent" />
     <androidx.fragment.app.FragmentContainerView
         android:name="id.ac.ui.cs.mobileprogramming.usmansidiq.helloworld.FirstFragment"
-        android:id="@+id/name"
+        android:id="@+id/name_f"
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="300dp"
@@ -24,11 +24,11 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
     <androidx.fragment.app.FragmentContainerView
         android:name="id.ac.ui.cs.mobileprogramming.usmansidiq.helloworld.SecondFragment"
-        android:id="@+id/details"
+        android:id="@+id/details_f"
         android:layout_weight="2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name"/>
+        app:layout_constraintTop_toBottomOf="@+id/name_f"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
