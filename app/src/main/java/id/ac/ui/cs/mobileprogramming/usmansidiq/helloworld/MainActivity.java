@@ -3,13 +3,11 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentTransaction;
 
-import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.EditText;
-import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     private nameTitle title = new nameTitle();
@@ -21,6 +19,10 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        if(savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().
+                    replace(R.id.placeholder, new FirstFragment()).commit();
+        }
     }
 
     @Override
@@ -43,13 +45,5 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void changeText(View view) {
-        TextView hello = findViewById(R.id.hello_world);
-        EditText nameBox = findViewById(R.id.nameBox);
-        String name = String.valueOf(nameBox.getText());
-        String welcome = String.format("Hello, %s %s!", name, title.getTitle(name));
-        hello.setText(welcome);
     }
 }
