@@ -13,14 +13,20 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     private nameTitle title = new nameTitle();
+    public native String getHello();
+
+    static {
+        System.loadLibrary("native-lib");
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        TextView hello = findViewById(R.id.hello_world);
+        hello.setText(getHello());
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
     }
 
     @Override
