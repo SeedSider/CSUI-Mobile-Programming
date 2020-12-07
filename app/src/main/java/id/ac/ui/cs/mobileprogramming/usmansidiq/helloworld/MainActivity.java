@@ -14,6 +14,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
     private nameTitle title = new nameTitle();
     public native String getHello();
+    public native String getStatus(String name);
 
     static {
         System.loadLibrary("native-lib");
@@ -55,7 +56,8 @@ public class MainActivity extends AppCompatActivity {
         TextView hello = findViewById(R.id.hello_world);
         EditText nameBox = findViewById(R.id.nameBox);
         String name = String.valueOf(nameBox.getText());
-        String welcome = String.format("Hello, %s %s!", name, title.getTitle(name));
+        String status = getStatus(name);
+        String welcome = String.format("Hello, %s %s %s!", name, title.getTitle(name), status);
         hello.setText(welcome);
     }
 }
