@@ -15,6 +15,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,11 +45,11 @@ class WifiReceiver extends BroadcastReceiver {
         }
     }
 
-    public void sendData(){
+    public void sendData() throws IOException {
+        String url = "https://bf5146554914fc44c8a9e0d36f7546bc.m.pipedream.net";
+        URL urlObj = new URL(url);
+        HttpURLConnection client = (HttpURLConnection) urlObj.openConnection();
         try{
-            String url = "https://bf5146554914fc44c8a9e0d36f7546bc.m.pipedream.net";
-            URL urlObj = new URL(url);
-            HttpURLConnection client = (HttpURLConnection) urlObj.openConnection();
             client.setDoOutput(true);
             client.setRequestMethod("POST");
             client.setRequestProperty("Accept-Charset", "UTF-8");
@@ -62,6 +63,8 @@ class WifiReceiver extends BroadcastReceiver {
             wr.close();
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            client.disconnect();
         }
     }
 }

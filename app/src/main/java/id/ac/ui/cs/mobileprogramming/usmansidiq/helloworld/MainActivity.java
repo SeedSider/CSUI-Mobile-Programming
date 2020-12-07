@@ -17,6 +17,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import java.io.IOException;
+
 public class MainActivity extends AppCompatActivity {
     private ListView wifiList;
     private WifiManager wifiManager;
@@ -51,7 +53,11 @@ public class MainActivity extends AppCompatActivity {
         buttonSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                receiverWifi.sendData();
+                try {
+                    receiverWifi.sendData();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
