@@ -1,9 +1,5 @@
 package id.ac.ui.cs.mobileprogramming.usmansidiq.helloworld;
-
-import android.annotation.SuppressLint;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -12,11 +8,11 @@ import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.TextView;
 
-import id.ac.ui.cs.mobileprogramming.usmansidiq.helloworld.R;
-
 public class MainActivity extends AppCompatActivity {
+    private nameTitle title = new nameTitle();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,14 +21,6 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                TextView hello = findViewById(R.id.textview_first);
-                hello.setText(R.string.hello_changed);
-            }
-        });
     }
 
     @Override
@@ -55,5 +43,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void changeText(View view) {
+        TextView hello = findViewById(R.id.hello_world);
+        EditText nameBox = findViewById(R.id.nameBox);
+        String name = String.valueOf(nameBox.getText());
+        String welcome = String.format("Hello, %s %s!", name, title.getTitle(name));
+        hello.setText(welcome);
     }
 }
