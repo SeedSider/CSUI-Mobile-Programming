@@ -1,36 +1,49 @@
 package id.ac.ui.cs.mobileprogramming.usmansidiq.helloworld;
 
+import androidx.lifecycle.ViewModelProvider;
 import android.os.Bundle;
+import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
-
-import id.ac.ui.cs.mobileprogramming.usmansidiq.helloworld.R;
+import id.ac.ui.cs.mobileprogramming.usmansidiq.helloworld.models.Person;
+import id.ac.ui.cs.mobileprogramming.usmansidiq.helloworld.viewmodels.FirstViewModel;
 
 public class SecondFragment extends Fragment {
+    private FirstViewModel viewModel;
+
+    private TextView name;
+    private TextView birthplace;
+    private TextView quote;
 
     @Override
-    public View onCreateView(
-            LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState
-    ) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_second, container, false);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        viewModel = new ViewModelProvider(this.getActivity()).get(FirstViewModel.class);
+
+        viewModel.getSelectedPerson().observe(this, item -> {
+            displayDetails(viewModel.getPersonDetails(item));
+        });
     }
 
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void displayDetails(Person person){
+        name.setText(person.getName());
+        birthplace.setText(person.getBirthplace());
+        quote.setText(person.getQuote());
+    }
 
-        view.findViewById(R.id.button_second).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(SecondFragment.this)
-                        .navigate(R.id.action_SecondFragment_to_FirstFragment);
-            }
-        });
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.second_fragment,
+                container, false);
+
+        name = view.findViewById(R.id.name);
+        birthplace = view.findViewById(R.id.birthplace);
+        quote = view.findViewById(R.id.quote);
+
+        return view;
     }
 }

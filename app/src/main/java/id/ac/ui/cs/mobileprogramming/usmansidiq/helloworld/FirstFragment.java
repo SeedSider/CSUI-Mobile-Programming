@@ -1,36 +1,47 @@
 package id.ac.ui.cs.mobileprogramming.usmansidiq.helloworld;
 
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import android.os.Bundle;
+import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
-
-import id.ac.ui.cs.mobileprogramming.usmansidiq.helloworld.R;
+import id.ac.ui.cs.mobileprogramming.usmansidiq.helloworld.viewmodels.FirstViewModel;
 
 public class FirstFragment extends Fragment {
 
+    private FirstViewModel viewModel;
+    private ListView lv;
+
     @Override
-    public View onCreateView(
-            LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState
-    ) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_first, container, false);
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        viewModel = new ViewModelProvider(this).get(FirstViewModel.class);
+
+        lv.setAdapter(new ArrayAdapter<String>(this.getActivity(),
+                android.R.layout.simple_list_item_1, viewModel.getPersonList()));
+
+        lv.setOnItemClickListener((adapter, itemView, pos, id) -> {
+            TextView tv = (TextView)itemView;
+            Toast.makeText(this.getContext(), tv.getText().toString(), Toast.LENGTH_SHORT).show();
+            viewModel.selectPerson(tv.getText().toString());
+        });
     }
 
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
-        view.findViewById(R.id.button_first).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(FirstFragment.this)
-                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
-            }
-        });
+        View view = inflater.inflate(R.layout.first_fragment,
+                container, false);
+        lv = (ListView)view.findViewById(R.id.person_lv);
+
+        return view;
     }
 }
